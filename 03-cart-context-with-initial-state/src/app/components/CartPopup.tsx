@@ -1,6 +1,6 @@
 "use client";
 import { type Cart } from "@/api/types";
-import { useCart } from "./CartContext";
+import { useCart } from "../context/CartContext";
 
 export default function CartPopup({
   clearCartAction,
@@ -8,7 +8,6 @@ export default function CartPopup({
   clearCartAction: () => Promise<Cart>;
 }) {
   const [cart, setCart] = useCart();
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="flex flex-col items-center justify-center w-1/2 p-4 bg-white rounded-lg">
@@ -17,7 +16,7 @@ export default function CartPopup({
         </h2>
         {cart.products.length === 0 && (
           <p className="mb-4 text-lg leading-7 text-gray-600">
-            You have 0 items in your cart.
+            You have {cart.products.length} items in your cart.
           </p>
         )}
         {cart.products.length > 0 && (

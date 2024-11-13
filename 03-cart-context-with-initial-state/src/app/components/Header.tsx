@@ -2,18 +2,17 @@
 import { useState } from "react";
 import Link from "next/link";
 
-import { useCart } from "./CartContext";
 import CartPopup from "./CartPopup";
 import { type Cart } from "@/api/types";
+import { useCart } from "../context/CartContext";
 
 export default function Header({
   clearCartAction,
 }: {
   clearCartAction: () => Promise<Cart>;
 }) {
-  const [cart] = useCart();
   const [showCart, setShowCart] = useState(false);
-
+  const [cart] = useCart();
   return (
     <header className="mx-2 flex items-center justify-between p-4 bg-blue-800 mb-10 shadow-lg shadow-white rounded-b-2xl">
       <Link href="/">

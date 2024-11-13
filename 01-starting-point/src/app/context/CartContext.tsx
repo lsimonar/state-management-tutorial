@@ -2,7 +2,10 @@
 import React, { createContext, useState } from "react";
 import { type Cart } from "@/api/types";
 
-const useCartState = (initialCart: Cart) => useState<Cart>(initialCart);
+const useCartState = () =>
+  useState<Cart>({
+    products: [],
+  });
 
 export const CartContext = createContext<ReturnType<
   typeof useCartState
@@ -16,14 +19,8 @@ export const useCart = () => {
   return cart;
 };
 
-const CartProvider = ({
-  cart: initialCart,
-  children,
-}: {
-  cart: Cart;
-  children: React.ReactNode;
-}) => {
-  const [cart, setCart] = useCartState(initialCart);
+export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [cart, setCart] = useCartState();
 
   return (
     <CartContext.Provider value={[cart, setCart]}>
@@ -31,5 +28,3 @@ const CartProvider = ({
     </CartContext.Provider>
   );
 };
-
-export default CartProvider;
